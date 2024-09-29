@@ -20,13 +20,13 @@ export default function Home() {
     if (selectedCategory) query.category = selectedCategory;
     if (searchQuery) query.search = searchQuery;
     router.push({ pathname: '/', query }); // Push query parameters to the URL
-  }, [selectedCategory, searchQuery]); // Run effect when selectedCategory or searchQuery changes
+  }, [selectedCategory, searchQuery,router]); // Run effect when selectedCategory or searchQuery changes
 
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(resetProducts());
     dispatch(fetchProducts({ category: selectedCategory, skip: 0, search: searchQuery }));
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, dispatch]);
 
   const handleLoadMore = () => {
     dispatch(incrementSkip());
